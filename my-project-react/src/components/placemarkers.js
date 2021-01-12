@@ -1,19 +1,18 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
+import Modal from './Modal/modal.css'
 
 class PlaceMarkers extends React.Component {
 
     constructor(){
         super()
         this.state={
-            placemarkers:[
-            ],
-            
+            placemarkers:[],
         }
+        let photosUrlArray = new Array();
     } 
-
- 
+  
 
     componentDidMount(){
         fetch('http://localhost:20000/placemarkers').then((response)=>{
@@ -26,52 +25,51 @@ class PlaceMarkers extends React.Component {
         })
     }
 
+    
+    modalActiveMarker( i, e )
+    {  
+        this.currentItem=i;
+
+        this.setState({ ...this.state,modal_active: !this.state.modal_active })
+    }
+
+    modalActive(  e )
+    {
+        this.setState({ ...this.state, modal_active: !this.state.modal_active})
+    }
+
+
     render() {
         const{selected,setSelected}=this.props
         return(
-            
-                this.state.placemarkers.map(({id,name,latCur,lngCur,description, photos})=>(
+                <div>
+                {this.state.placemarkers.map((item, index)=>(
+                    
                     <Marker
-                    key={id}
-                    position ={{lat: latCur,lng: lngCur }}
-                    onClick={()=>{
-                        <InfoWindow position ={{lat: latCur,lng: lngCur }}>
-                        <div>
-                            {console.log(name, latCur, lngCur, description)}
-                            <h1>HAHAHAHA</h1>
-                            </div>
-                        </InfoWindow>
-                    }}
+                    key={item.id}
+                    position ={{lat: item.latCur,lng: item.lngCur }}
+                    onClick={this.modalActiveMarker.bind(this, item) }
                     />              
-                ))
+                ))}
+                <div className={this.state.modal_active ? "modal active"  : "modal" } onClick={this.modalActive.bind(this)}> 
+                {  this.currentItem && 
+                    <div className={this.state.modal_active ? "modal__content active"  : "modal" } onClick={e=>e.stopPropagation()}>
+                        
+                        <h1>{this.currentItem.name}</h1>
+                        <p>{this.currentItem.description}</p>
+                        {this.currentItem.photos.map((item, index)=>( 
+                            <div key={index}>
+                               <img src={`http://localhost:20000${item.url}`}></img>
+                            </div>
+                        ))}
+                    </div> }    
+                </div>
+                </div>
         )
         
     } 
 }
-{/* <Marker
-key={id}
-position ={{lat: latCur,lng: lngCur }}
-onClick={()=>{
-    setSelected(this.state.placemarkers)
-}}
-/> 
+//id,name,latCur,lngCur,description, photos
 
-))}
-{
-selected ? 
-(<InfoWindow position ={{lat: selected.latCur,lng: selected.lngCur }}>
-    <div>
-        <h1>HAHAHAHA</h1>
-        </div>
-</InfoWindow>): null
-} */}
-
-{/* <InfoWindow position ={{lat: latCur,lng: lngCur }}>
-                            {console.log(1)}
-                        <div>
-                            <h1>HAHAHAHA</h1>
-                            </div>
-                        </InfoWindow>
- */}
 
 export default PlaceMarkers;
