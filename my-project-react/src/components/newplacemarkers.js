@@ -3,13 +3,15 @@ import fetch from 'isomorphic-fetch';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
 import Modal from './Modal/modal.css'
 import FileUpload from './fileupload'
+import axios from 'axios'
 
 class NewPlaceMarkers extends React.Component {
 
     constructor(){
         super()
         this.state={
-            data:{}
+            data:{},
+            file:null
         }
 
     } 
@@ -19,6 +21,26 @@ class NewPlaceMarkers extends React.Component {
         
     }
 
+    handleChange =(event)=>{
+        this.setState({file: event.target.files[0]})
+    }
+
+    handleSubmit = async (event)=>{
+        event.preventDefault()
+
+        const data=new FormData()
+        data.append('files', this.state.file)
+
+        const upload_res = await axios({
+            method: 'POST',
+            url:"http://localhost:20000/upload",
+            data
+        })
+
+        this.photoLoad=upload_res.data[0]
+        this.photoUrl=upload_res.data[0].url
+
+    }
 
     changeValueDescription( e ){
         this.state.data.description = e.target.value;
@@ -31,10 +53,6 @@ class NewPlaceMarkers extends React.Component {
     }
 
     saveStateDocument(e) {
-        // let formData = new FormData();
-        // formData.append("name",this.state.data.name);
-        // formData.append("latCur",this.props.latNew);
-        // formData.append("lngCur",this.props.lngNew);
         let result = fetch('http://localhost:20000/placemarkers',
         {
             method: 'post',
@@ -43,14 +61,18 @@ class NewPlaceMarkers extends React.Component {
             "name": this.state.data.name,
             "latCur":this.props.latNew,
             "lngCur":this.props.lngNew,
-            "description":this.state.data.description
+            "description":this.state.data.description,
+            "photos":[
+                    this.photoLoad       
+            ]
         })
         })
         this.props.setModalActive(false);
-        
+        console.log(result)
     }
 
     render() {
+       
         return(
             <div>
                 <div>
@@ -61,7 +83,15 @@ class NewPlaceMarkers extends React.Component {
                     <input  type="text" name="input2" id="input2" required=""
                          value={ this.state.data.description || "" } onChange={ this.changeValueDescription.bind( this ) }/>
                 </div>
-                <FileUpload/>
+                <div className="FileUpload">
+                <form onSubmit={this.handleSubmit}>
+                    <input onChange={this.handleChange} type="file"/>
+                    <button>Загрузить</button>
+                </form>
+                { this.photoUrl ? 
+                <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://localhost:20000${this.photoUrl}`} />
+                :""}
+                 </div>
                 <div>
                     
                     <button

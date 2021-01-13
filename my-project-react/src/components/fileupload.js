@@ -21,22 +21,24 @@ export default class FileUpload extends React.Component{
             url:"http://localhost:20000/upload",
             data
         })
-        console.log(`http://localhost:20000/uploads/${this.state.file.name}`)
+
+        this.photoUrl=upload_res.data[0].url
 
     }
 
     render(){
+        const { uploadUrl } = this.props;
         return (
             <div className="FileUpload">
                 <form onSubmit={this.handleSubmit}>
                     <input onChange={this.handleChange} type="file"/>
                     <button>Загрузить</button>
                 </form>
-                { this.state.file ? 
-                <img src={`http://localhost:20000/uploads/${this.state.file.name}`} />
+                { this.photoUrl ? 
+                <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://localhost:20000${this.photoUrl}`} /> && (uploadUrl= this.photoUrl) 
                 :""}
             </div>
         )
     }
-    //<img src={`http://localhost:20000${this.upload_res.data[0].url}`} />
+
 }
