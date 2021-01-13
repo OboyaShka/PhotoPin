@@ -11,10 +11,11 @@ class PlaceMarkers extends React.Component {
             placemarkers:[],
         }
         let photosUrlArray = new Array();
+
+        this.loadPlaceMarkers()
     } 
   
-
-    componentDidMount(){
+    loadPlaceMarkers(){
         fetch('http://localhost:20000/placemarkers').then((response)=>{
             if(response.status >= 400){
                 throw new Error('Bad response From Server')
@@ -23,6 +24,10 @@ class PlaceMarkers extends React.Component {
         }).then(( placemarkers )=> {
             this.setState({placemarkers:  placemarkers});
         })
+    }
+
+    componentDidUpdate(){
+        this.loadPlaceMarkers();
     }
 
     

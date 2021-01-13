@@ -34,27 +34,15 @@ const center={
 
 
 export default function App() {
+
+
   const { isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: "AIzaSyANk4tP5-akhFeXnefqXMwGDl0MecsszHU",
     libraries,
   })
   
-  // const [centerMap, setCenterMap]= React.useState([])
-  // onMouseUp={
-
-  //   (event)=>{
-     
-  //     setCenterMap(
-  //       {
-  //         lat: event.latLng.lat(),
-  //         lng: event.latLng.lng(),
-  // })
-  // }
-  // }
-  // center={
-  //   {
-  //     lat:centerMap.lat, lng:centerMap.lng
-  //   }
+  const [centerMap, setCenterMap]= React.useState([])
+ 
 
   const [markers, setMarkers]= React.useState([])
   const [modalActive, setModalActive]= React.useState(false)
@@ -63,9 +51,7 @@ export default function App() {
   if (!isLoaded) return "Loading Maps"
 
 
-
   
-
 
   return (
     <div className="App">
@@ -76,6 +62,7 @@ export default function App() {
       zoom={14} 
       center={center}
       options={options}
+      
       >
       
 
@@ -91,8 +78,8 @@ export default function App() {
         <GoogleMap mapContainerStyle={mapCreateContainerStyle} 
           zoom={14} 
           center={
-          center
-          }
+               center
+            }
           options={options}
           onClick={(event)=>{
               setMarkers(
@@ -115,6 +102,17 @@ export default function App() {
       </Modal>
     </div>
   );
-  
+//   (event)=>{
+         
+//     setCenterMap(
+//       {
+//         lat: event.latLng.lat(),
+//         lng: event.latLng.lng(),
+//       })
+// }
 
+
+// {
+//   lat:centerMap.lat, lng:centerMap.lng
+// }
 }
