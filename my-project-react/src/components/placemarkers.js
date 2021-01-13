@@ -53,13 +53,13 @@ class PlaceMarkers extends React.Component {
                 ))}
                 <div className={this.state.modal_active ? "modal active"  : "modal" } onClick={this.modalActive.bind(this)}> 
                 {  this.currentItem && 
-                    <div className={this.state.modal_active ? "modal__content active"  : "modal" } onClick={e=>e.stopPropagation()}>
+                    <div className={this.state.modal_active ? "modal__content active"  : "modal__content" } onClick={e=>e.stopPropagation()}>
                         
                         <h1>{this.currentItem.name}</h1>
                         <p>{this.currentItem.description}</p>
                         {this.currentItem.photos.map((item, index)=>( 
                             <div key={index}>
-                               <img src={`http://localhost:20000${item.url}`}></img>
+                               <img style={{ objectFit: "cover", width: "700px", height: "400px"}} src={`http://localhost:20000${item.url}`}/>
                             </div>
                         ))}
                     </div> }    
