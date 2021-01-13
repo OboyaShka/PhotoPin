@@ -37,7 +37,9 @@ export default function App() {
   if (loadError) return "Error loading maps"
   if (!isLoaded) return "Loading Maps"
 
-
+  function postData(){
+    
+  }
   
   return (
     <div className="App">
@@ -53,6 +55,10 @@ export default function App() {
 
       </GoogleMap>
       
+      <input type="text" name="name"></input>
+      <input type="text" name="lat"></input>
+      <input type="text" name="lng"></input>
+      <input type="submit" onClick={postData}></input>
       
     </div>
   );
