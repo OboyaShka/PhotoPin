@@ -52,7 +52,7 @@ class PlaceMarkers extends React.Component {
                     
                     <Marker
                     key={item.id}
-                    position ={{lat: item.latCur,lng: item.lngCur }}
+                    position ={{lat: parseFloat(item.latCur),lng: parseFloat(item.lngCur) }}
                     onClick={this.modalActiveMarker.bind(this, item) }
                     />              
                 ))}

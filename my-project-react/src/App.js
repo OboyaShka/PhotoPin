@@ -7,7 +7,7 @@ import MapStyles from './MapStyles'
 import Modal from './components/Modal/modal';
 import { useState, useCallback } from 'react'
 
-const libraries=["places"]
+const libraries=["places","visualization","drawing","geometry","localContext"]
 
 
 const mapContainerStyle = {
@@ -39,6 +39,7 @@ export default function App() {
   const { isLoaded, loadError} = useLoadScript({
     googleMapsApiKey: "AIzaSyANk4tP5-akhFeXnefqXMwGDl0MecsszHU",
     libraries,
+ 
   })
   
   const [centerMap, setCenterMap]= React.useState([])
@@ -84,15 +85,15 @@ export default function App() {
           onClick={(event)=>{
               setMarkers(
                 {
-                  lat: event.latLng.lat(),
-                  lng: event.latLng.lng(),
+                  lat: parseFloat(event.latLng.lat()),
+                  lng: parseFloat(event.latLng.lng()),
           })}}
           
           >
            <PlaceMarkers />
 
            <Marker
-           position={{lat:markers.lat, lng:markers.lng}}/>
+           position={{lat:parseFloat(markers.lat), lng: parseFloat(markers.lng)}}/>
 
      
 

@@ -18,7 +18,7 @@ class NewPlaceMarkers extends React.Component {
   
 
     componentDidMount(){
-        
+    
     }
 
     handleChange =(event)=>{
@@ -68,8 +68,11 @@ class NewPlaceMarkers extends React.Component {
         })
         })
         this.props.setModalActive(false);
-        console.log(result)
+    
+        this.setState(this.state.data={}, this.state.file= null);
     }
+
+    
 
     render() {
        
