@@ -2,7 +2,6 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
 import Modal from './Modal/modal.css'
-import FileUpload from './fileupload'
 import axios from 'axios'
 
 class NewPlaceMarkers extends React.Component {
