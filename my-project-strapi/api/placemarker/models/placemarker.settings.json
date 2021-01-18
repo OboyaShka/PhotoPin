@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "placemarkers",
+  "info": {
+    "name": "placemarker"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "latCur": {
+      "type": "float"
+    },
+    "lngCu": {
+      "type": "float"
+    },
+    "photos": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

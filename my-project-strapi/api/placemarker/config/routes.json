@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/placemarkers",
+      "handler": "placemarker.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/placemarkers/count",
+      "handler": "placemarker.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/placemarkers/:id",
+      "handler": "placemarker.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/placemarkers",
+      "handler": "placemarker.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/placemarkers/:id",
+      "handler": "placemarker.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/placemarkers/:id",
+      "handler": "placemarker.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
