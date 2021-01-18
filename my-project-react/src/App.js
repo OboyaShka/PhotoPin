@@ -6,6 +6,7 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/a
 import MapStyles from './MapStyles'
 import Modal from './components/Modal/modal';
 import { useState, useCallback } from 'react'
+import Login from './Login'
 
 const libraries=["places","visualization","drawing","geometry","localContext"]
 
@@ -56,6 +57,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <Login/>
       <h1>Да начнётся работа</h1>
       <button onClick={()=>setModalActive(true)}>Добавить метку</button>
 
