@@ -7,6 +7,7 @@ export const callApi = async (path, method, body) => {
             "content-type": "application/json"
         },
         credentials: "include",
+        
         body: JSON.stringify(body)
     })
     const data = await response.json();

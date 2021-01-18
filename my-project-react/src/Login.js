@@ -1,31 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
-import {callApi} from "./utils"
+import { callApi } from "./utils"
 
 export default function Login() {
     const emailRef =useRef()
     const passwordRef=useRef()
+    const [errorMsg, setErrorMsg] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await callApi("/auth/local", "POST", {
+        setErrorMsg(null)
+
+        try{
+        const response = await callApi("/auth/local","POST", {
             identifier: emailRef.current.value,
             password: passwordRef.current.value
         })
-       
+        
+        if (!response.user){
+          throw "Неправильный логин или пароль. Попробуйте ещё раз."
+        }}catch(err){
+          setErrorMsg(err)
+        }
+        
+
     }
 
    
   return (
     <main>
-      <form class="measure center mt4" onSubmit={handleSubmit}>
+      {errorMsg && <p>{errorMsg}</p>}
+      <form className="measure center mt4" onSubmit={handleSubmit}>
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
             <legend className="f4 fw6 ph0 mh0">Sign In</legend>
             <div className="mt3">
-              <label className="db fw6 lh-copy f6" for="email-address">Email</label>
+              <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
               <input ref={emailRef} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address" />
             </div>
             <div className="mv3">
-              <label className="db fw6 lh-copy f6" for="password">Password</label>
+              <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
               <input ref={passwordRef} className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password" />
             </div>
           </fieldset>

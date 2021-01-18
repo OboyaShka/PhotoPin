@@ -29,6 +29,10 @@ class PlaceMarkers extends React.Component {
     componentDidUpdate(){
         this.loadPlaceMarkers();
     }
+    /*
+    componentDidMount(){
+        this.loadPlaceMarkers();
+    }*/
 
     
     modalActiveMarker( i, e )
