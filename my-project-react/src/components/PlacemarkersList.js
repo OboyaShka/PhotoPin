@@ -1,9 +1,11 @@
+
+
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
 import Modal from './Modal/modal.css'
 
-class PlaceMarkers extends React.Component {
+class PlacemarkersList extends React.Component {
 
     constructor(){
         super()
@@ -50,34 +52,24 @@ class PlaceMarkers extends React.Component {
 
     render() {
         return(
-                <div>
-                {this.state.placemarkers.map((item, index)=>(
-                    <Marker
-                    key={item.id}
-                    position ={{lat: parseFloat(item.latCur),lng: parseFloat(item.lngCur) }}
-                    onClick={this.modalActiveMarker.bind(this, item) }
-                    />         
-                ))}
-                <div className={this.state.modal_active ? "modal active"  : "modal" } onClick={this.modalActive.bind(this)}> 
-                {  this.currentItem && 
-                    <div className={this.state.modal_active ? "modal__content active"  : "modal__content" } onClick={e=>e.stopPropagation()}>
-                        
-                        <h1>{this.currentItem.name}</h1>
-                        <p>{this.currentItem.description}</p>
-                        {this.currentItem.photos.map((item, index)=>( 
+                <ul>
+                {this.state.placemarkers.map((itemList, index)=>(   
+                    itemList.users_permissions_user.id === this.props.user.id ? 
+                    <li key={index}>
+                        <div>{itemList.name}</div>
+                        <div>{itemList.description}</div>
+                        {itemList.photos.map((item, index)=>( 
                             <div key={index}>
                                <img style={{ objectFit: "cover", width: "700px", height: "400px"}} src={`http://localhost:20000${item.url}`}/>
                             </div>
                         ))}
-                        <p>{this.currentItem.users_permissions_user.username}</p>
-                    </div> }    
-                </div>
-                </div>
+                    </li>: ""
+                ))} 
+                </ul>
         )
         
     } 
 }
 //id,name,latCur,lngCur,description, photos
 
-
-export default PlaceMarkers;
+export default PlacemarkersList;

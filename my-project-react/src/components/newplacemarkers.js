@@ -4,6 +4,8 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/a
 import Modal from './Modal/modal.css'
 import axios from 'axios'
 
+
+
 class NewPlaceMarkers extends React.Component {
 
     constructor(){
@@ -25,8 +27,8 @@ class NewPlaceMarkers extends React.Component {
     }
 
     handleSubmit = async (event)=>{
-        event.preventDefault()
 
+        event.preventDefault()
         const data=new FormData()
         data.append('files', this.state.file)
 
@@ -52,6 +54,7 @@ class NewPlaceMarkers extends React.Component {
     }
 
     saveStateDocument(e) {
+        
         let result = fetch('http://localhost:20000/placemarkers',
         {
             method: 'post',
@@ -63,7 +66,8 @@ class NewPlaceMarkers extends React.Component {
             "description":this.state.data.description,
             "photos":[
                     this.photoLoad       
-            ]
+            ],
+            "users_permissions_user": this.props.user
         })
         })
         this.props.setModalActive(false);

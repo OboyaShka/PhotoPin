@@ -1,4 +1,5 @@
-import PlaceMarkers from './placemarkers'
+import PrivatePlaceMarkers from './privateplacemarkers'
+import PlacemarkersList from './PlacemarkersList'
 import NewPlaceMarkers from './newplacemarkers'
 import React from 'react';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
@@ -6,14 +7,13 @@ import MapStyles from '../MapStyles'
 import Modal from './Modal/modal';
 import { useState, useCallback } from 'react'
 import "../styles.css";
-
-
+import { useCurrentUser } from "./CurrentUser";
 const libraries=["places","visualization","drawing","geometry","localContext"]
 
 
 const mapContainerStyle = {
     width: "100vw",
-    height: "95vh"
+    height: "85vh"
 }
 
 const mapCreateContainerStyle = {
@@ -35,14 +35,14 @@ const center={
 
 
 
-export default function  Map() {
+export default function  MyPlacemarkers() {
     
     const { isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: "AIzaSyANk4tP5-akhFeXnefqXMwGDl0MecsszHU",
         libraries,
      
       })
-      
+      const user = useCurrentUser();
       const [centerMap, setCenterMap]= React.useState([])
      
     
@@ -55,21 +55,32 @@ export default function  Map() {
 
 
     return (
-
-
-
         <main>
+      <button onClick={()=>setModalActive(true)}>Добавить метку</button>
+    
+      <PlacemarkersList user={user}/>
+      
+      <Modal active={modalActive} setActive={setModalActive}>
 
-      <GoogleMap mapContainerStyle={mapContainerStyle} 
-      zoom={14} 
-      center={center}
-      options={options}
-      
-      >   
-      <PlaceMarkers />
-      </GoogleMap>
-      
-      
+        <NewPlaceMarkers user={user} setModalActive={setModalActive} latNew={markers.lat} lngNew={markers.lng} />
+        <GoogleMap mapContainerStyle={mapCreateContainerStyle} 
+          zoom={14} 
+          center={
+               center
+            }
+          options={options}
+          onClick={(event)=>{
+              setMarkers(
+                {
+                  lat: parseFloat(event.latLng.lat()),
+                  lng: parseFloat(event.latLng.lng()),
+          })}} >
+          <PrivatePlaceMarkers user={user}/>
+
+           <Marker position={{lat:parseFloat(markers.lat), lng: parseFloat(markers.lng)}}/>
+        </GoogleMap>
+      </Modal>
+
       </main>
     );
 }

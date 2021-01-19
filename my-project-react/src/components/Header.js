@@ -21,6 +21,9 @@ const Header = () => {
         <Link className="link dim white dib mr3" to="/">
           Карта
         </Link>
+        <Link className="link dim white dib mr3" to="/placemarkers">
+          Мои точки
+        </Link>
         {!user.isAuthenticated && (
           <Link className="link dim white dib mr3" to="/login" >
             Войти

@@ -1,33 +1,52 @@
 import './App.css';
-import PlaceMarkers from './components/placemarkers'
-import NewPlaceMarkers from './components/newplacemarkers'
+import MyPlacemarkers from './components/MyPlacemarkers'
 import React from 'react';
-import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
-import MapStyles from './MapStyles'
-import Modal from './components/Modal/modal';
-import { useState, useCallback } from 'react'
 import Login from './Login'
 import Header from "./components/Header";
 import "./styles.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Map from "./components/Map";
+import { useCurrentUser, useDispatchCurrentUser } from "./components/CurrentUser";
 
+function PrivateRoute({children, ...rest}){
+  let currentUser = useCurrentUser();
+
+  return(
+    <Route
+    {...rest}
+    render={({location}) =>
+      currentUser.isAuthenticated ? (
+        children
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: {from: location}
+          }}
+        />
+      )
+  
+  }      
+    />
+  )
+}
 
 
 export default function App() {
-
-
   
   return (
     <Router>
       <>
       <Header/>
       <Switch>
+      <PrivateRoute path="/placemarkers">
+        <MyPlacemarkers/>
+      </PrivateRoute>
       <Route path="/login">
             <Login />
       </Route>
       <Route path="/">
-      <Map/>
+        <Map/>
       </Route>
       </Switch>
       </>
