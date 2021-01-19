@@ -1,30 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
-import { callApi } from "./utils"
+import { useCurrentUser, useDispatchCurrentUser } from "./components/CurrentUser";
+import { useHistory } from "react-router-dom";
+import { callApi } from "./utils";
 
 export default function Login() {
-    const emailRef =useRef()
-    const passwordRef=useRef()
-    const [errorMsg, setErrorMsg] = useState(null)
+  const dispatch = useDispatchCurrentUser();
+  const currentUser = useCurrentUser();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const history = useHistory()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setErrorMsg(null)
+  const [errorMsg, setErrorMsg] = useState(null);
 
-        try{
-        const response = await callApi("/auth/local","POST", {
-            identifier: emailRef.current.value,
-            password: passwordRef.current.value
-        })
-        
-        if (!response.user){
-          throw "Неправильный логин или пароль. Попробуйте ещё раз."
-        }}catch(err){
-          setErrorMsg(err)
-        }
-        
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setErrorMsg(null);
+    try {
+      const response = await callApi("/auth/local", "POST", {
+        identifier: emailRef.current.value,
+        password: passwordRef.current.value
+      })
 
+      if(!response.user) {
+        throw "Cannot login. Please try again."
+      }
+
+      dispatch({ type: "LOGIN", user: response.user });
+      history.push("/")
+    } catch (err) {
+      setErrorMsg(err)
     }
-
+  }
    
   return (
     <main>
