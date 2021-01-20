@@ -1,5 +1,5 @@
-import PlaceMarkers from './placemarkers'
-import NewPlaceMarkers from './newplacemarkers'
+import PlaceMarkers from './Placemarkers'
+import NewPlacemarkers from './NewPlacemarkers'
 import React from 'react';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
 import MapStyles from '../MapStyles'

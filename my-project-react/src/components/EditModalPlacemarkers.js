@@ -6,7 +6,7 @@ import axios from 'axios'
 
 
 
-class NewPlacemarkers extends React.Component {
+class EditModalPlacemarkers extends React.Component {
 
     constructor(){
         super()
@@ -55,49 +55,71 @@ class NewPlacemarkers extends React.Component {
 
     saveStateDocument(e) {
         
-        let result = fetch('http://localhost:20000/placemarkers',
+        let result = fetch(`http://localhost:20000/placemarkers/${this.props.idEdit}`,
         {
-            method: 'post',
+            method: 'PUT',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
-            "name": this.state.data.name,
-            "latCur":this.props.latNew,
-            "lngCur":this.props.lngNew,
-            "description":this.state.data.description,
+            "name":this.state.data.name ||  this.props.nameEdit ,
+            "latCur":this.props.latNew || this.props.latEdit,
+            "lngCur":this.props.lngNew || this.props.lngEdit,
+            "description":this.state.data.description ||  this.props.descriptionEdit,
             "photos":[
-                    this.photoLoad       
+                    this.photoLoad || this.props.photosEdit[0]  
             ],
             "users_permissions_user": this.props.user
         })
         })
         this.props.setModalActive(false);
-        
-        window.location.href=window.location.href
-
+        this.props.callback()
         this.setState(this.state.data={}, this.state.file= null);
     }
+
+    deleteDocument(e) {
+        
+        let result = fetch(`http://localhost:20000/placemarkers/${this.props.idEdit}`,
+        {
+            method: 'delete',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+            "name":this.state.data.name ||  this.props.nameEdit ,
+            "latCur":this.props.latNew || this.props.latEdit,
+            "lngCur":this.props.lngNew || this.props.lngEdit,
+            "description":this.state.data.description ||  this.props.descriptionEdit,
+            "photos":[
+                    this.photoLoad || this.props.photosEdit[0]  
+            ],
+            "users_permissions_user": this.props.user
+        })
+        })
+        this.props.setModalActive(false);
+        setTimeout(() => {  this.props.callback() }, 200);
+      
+        this.setState(this.state.data={}, this.state.file= null);
+    }
+
 
     
 
     render() {
-
+       
         return(
             <div>
                 <div>
                     <div>Введите название места:</div>
-                    <input  type="text" name="input1" id="input1" required=""
-                         value={ this.state.data.name || "" } onChange={ this.changeValueName.bind( this ) }/>
+                    <input  type="text" name={`input1${this.props.idEdit}`} id={`input1${this.props.idEdit}`}  required=""
+                         value={ this.state.data.name || this.props.nameEdit || "" } onChange={ this.changeValueName.bind( this ) }/>
                     <div>Введите описание места:</div>
-                    <input  type="text" name="input2" id="input2" required=""
-                         value={ this.state.data.description || "" } onChange={ this.changeValueDescription.bind( this ) }/>
+                    <input  type="text" name={`input2${this.props.idEdit}`}  id={`input2${this.props.idEdit}`}  required=""
+                         value={ this.state.data.description ||this.props.descriptionEdit || "" } onChange={ this.changeValueDescription.bind( this ) }/>
                 </div>
                 <div className="FileUpload">
                 <form onSubmit={this.handleSubmit}>
                     <input onChange={this.handleChange} type="file"/>
                     <button>Загрузить</button>
                 </form>
-                { this.photoUrl ? 
-                <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://localhost:20000${this.photoUrl}`} />
+                { this.props.photosEdit[0] ? 
+                <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://localhost:20000${this.props.photosEdit[0].url}`} />
                 :""}
                  </div>
                 <div>
@@ -105,7 +127,9 @@ class NewPlacemarkers extends React.Component {
                     <button
                         onClick={ this.saveStateDocument.bind( this ) }>Сохранить
                     </button>
-                
+                    <button
+                        onClick={ this.deleteDocument.bind( this ) }>Удалить
+                    </button>
                 </div>
             </div>
         )
@@ -116,4 +140,4 @@ class NewPlacemarkers extends React.Component {
 //<button className={ buttonActionsClass } style={ { display: ( this.state.data._ID || this.state.data.id ? 'inline-flex' : 'none' ) } }
  //                       onClick={ this.removeDocument.bind( this ) }>Удалить</button>
 
-export default NewPlacemarkers;
+export default EditModalPlacemarkers;

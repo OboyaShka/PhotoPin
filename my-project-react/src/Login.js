@@ -22,7 +22,7 @@ export default function Login() {
       })
 
       if(!response.user) {
-        throw "Cannot login. Please try again."
+        throw "Неправильный логин или пароль. Попробуйте ещё раз"
       }
 
       dispatch({ type: "LOGIN", user: response.user });
@@ -37,22 +37,22 @@ export default function Login() {
       {errorMsg && <p>{errorMsg}</p>}
       <form className="measure center mt4" onSubmit={handleSubmit}>
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="f4 fw6 ph0 mh0">Sign In</legend>
+            <legend className="f4 fw6 ph0 mh0">Авторизация</legend>
             <div className="mt3">
-              <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
+              <label className="db fw6 lh-copy f6" htmlFor="email-address">E-mail</label>
               <input ref={emailRef} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address" />
             </div>
             <div className="mv3">
-              <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
+              <label className="db fw6 lh-copy f6" htmlFor="password">Пароль</label>
               <input ref={passwordRef} className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password" />
             </div>
           </fieldset>
           <div className="">
-            <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Sign in" />
+            <input className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Войти" />
           </div>
           <div className="lh-copy mt3">
-            <a href="#0" className="f6 link dim black db">Sign up</a>
-            <a href="#0" className="f6 link dim black db">Forgot your password?</a>
+            <a href="#0" className="f6 link dim black db">Забыли пароль?</a>
+            <a href="#0" className="f6 link dim black db">Регистрация</a>
           </div>
         </form>
     </main>

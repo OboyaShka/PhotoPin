@@ -2,8 +2,9 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
 import Modal from './Modal/modal.css'
+import IconLike from '../icon/logo512.png';
 
-class PlaceMarkers extends React.Component {
+class Placemarkers extends React.Component {
 
     constructor(){
         super()
@@ -12,7 +13,7 @@ class PlaceMarkers extends React.Component {
         }
         let photosUrlArray = new Array();
 
-        this.loadPlaceMarkers()
+        //this.loadPlaceMarkers()
     } 
   
     loadPlaceMarkers(){
@@ -25,14 +26,14 @@ class PlaceMarkers extends React.Component {
             this.setState({placemarkers:  placemarkers});
         })
     }
-
+    /*
     componentDidUpdate(){
         this.loadPlaceMarkers();
-    }
-    /*
+    }*/
+    
     componentDidMount(){
         this.loadPlaceMarkers();
-    }*/
+    }
 
     
     modalActiveMarker( i, e )
@@ -69,8 +70,11 @@ class PlaceMarkers extends React.Component {
                                <img style={{ objectFit: "cover", width: "700px", height: "400px"}} src={`http://localhost:20000${item.url}`}/>
                             </div>
                         ))}
+                        
                         <p>{this.currentItem.users_permissions_user.username}</p>
-                    </div> }    
+                        <button></button>
+                        <p>{this.currentItem.likes} Нравится</p>
+                    </div> } 
                 </div>
                 </div>
         )
@@ -80,4 +84,4 @@ class PlaceMarkers extends React.Component {
 //id,name,latCur,lngCur,description, photos
 
 
-export default PlaceMarkers;
+export default Placemarkers;

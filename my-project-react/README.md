@@ -68,3 +68,22 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+________________________________________________________________________________________________________________________________________________________________________
+
+App.js основной файлик с роутами.
+
+Header.js Шапка с вкладками. 
+
+Login.js Авторизация с cookies.
+
+Map.js Первая вкладка, большая карта со всеми пинами. 
+    Placemarkers.js Сами маркеры на карте всех пользователей.
+
+MyPlacemarkers.js Вторая вкладка. Доступна только авторизированному пользователю. Функции добавления пинов и просмотра собственных, а также их изменения и удаления. Инициализация модалки для добавления
+    NewPlacemarkers.js Содержимое модального окна для добавления новых пинов. 
+    ListPlacemarkers.js Список всех пинов.
+        EditPlacemarkers.js Инициализация модального окна, для изменения и удаления пинов.
+            EditModalPlacemarkers.js Содержимое модалки. POST и PUT.
+    PrivatePlaceMarker.js Отображения пинов авторизированново пользователя.

@@ -12,7 +12,7 @@ class PrivatePlaceMarkers extends React.Component {
         }
         let photosUrlArray = new Array();
 
-        this.loadPlaceMarkers()
+        //this.loadPlaceMarkers()
     } 
   
     loadPlaceMarkers(){
@@ -25,14 +25,14 @@ class PrivatePlaceMarkers extends React.Component {
             this.setState({placemarkers:  placemarkers});
         })
     }
-
+    /*
     componentDidUpdate(){
         this.loadPlaceMarkers();
-    }
-    /*
+    }*/
+    
     componentDidMount(){
         this.loadPlaceMarkers();
-    }*/
+    }
 
     
     modalActiveMarker( i, e )

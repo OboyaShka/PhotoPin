@@ -4,8 +4,9 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
 import Modal from './Modal/modal.css'
+import EditPlacemarkers from './EditPlacemarkers'
 
-class PlacemarkersList extends React.Component {
+class ListPlacemarkers extends React.Component {
 
     constructor(){
         super()
@@ -28,13 +29,9 @@ class PlacemarkersList extends React.Component {
         })
     }
 
-    componentDidUpdate(){
-        this.loadPlaceMarkers();
-    }
-    /*
     componentDidMount(){
         this.loadPlaceMarkers();
-    }*/
+    }
 
     
     modalActiveMarker( i, e )
@@ -48,6 +45,7 @@ class PlacemarkersList extends React.Component {
     {
         this.setState({ ...this.state, modal_active: !this.state.modal_active})
     }
+ 
 
 
     render() {
@@ -63,6 +61,8 @@ class PlacemarkersList extends React.Component {
                                <img style={{ objectFit: "cover", width: "700px", height: "400px"}} src={`http://localhost:20000${item.url}`}/>
                             </div>
                         ))}
+                        <EditPlacemarkers itemList={itemList} updateList={this.loadPlaceMarkers.bind(this)}/> 
+            
                     </li>: ""
                 ))} 
                 </ul>
@@ -72,4 +72,4 @@ class PlacemarkersList extends React.Component {
 }
 //id,name,latCur,lngCur,description, photos
 
-export default PlacemarkersList;
+export default ListPlacemarkers;

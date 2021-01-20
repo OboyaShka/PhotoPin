@@ -1,6 +1,6 @@
 import PrivatePlaceMarkers from './PrivatePlacemarkers'
 import ListPlacemarkers from './ListPlacemarkers'
-import NewPlacemarkers from './NewPlacemarkers'
+import EditModalPlacemarkers from './EditModalPlacemarkers'
 import React from 'react';
 import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/api'
 import MapStyles from '../MapStyles'
@@ -8,6 +8,7 @@ import Modal from './Modal/modal';
 import { useState, useCallback } from 'react'
 import "../styles.css";
 import { useCurrentUser } from "./CurrentUser";
+import { render } from 'react-dom';
 const libraries=["places","visualization","drawing","geometry","localContext"]
 
 
@@ -28,14 +29,12 @@ const options = {
 }
 
 
-const center={
-    lat: 56.837650,
-    lng: 60.594528 
-}  
 
 
 
-export default function  MyPlacemarkers( then ) {
+
+export default function EditPlacemarkers( itemList ) {
+    
     
     const { isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: "AIzaSyANk4tP5-akhFeXnefqXMwGDl0MecsszHU",
@@ -52,39 +51,63 @@ export default function  MyPlacemarkers( then ) {
       if (loadError) return "Error loading maps"
       if (!isLoaded) return "Loading Maps"
     
-    
+    let center={
+        lat: parseFloat(itemList.itemList.latCur),
+        lng: parseFloat(itemList.itemList.lngCur)
+      } 
 
-    return (
-        <main>
-      <button onClick={()=>setModalActive(true)}>Добавить точку</button>
-    
-      <ListPlacemarkers user={user}/>
+   
+    // function changeCenter()
+    // {
+    //     center={
+    //         lat: parseFloat(markers.lat),
+    //         lng: parseFloat(markers.lng)
+    //       }
+    // }
+    // , 
+    // changeCenter.bind(this)
+  
+      return (
       
-      <Modal active={modalActive} setActive={setModalActive}>
-
-        <NewPlacemarkers 
-          user={user} 
-          setModalActive={setModalActive} 
-          latNew={markers.lat} 
-          lngNew={markers.lng} />
+        <div>  
+    <button onClick={()=>setModalActive(true)}>Изменить точку</button>
+    <Modal active={modalActive} setActive={setModalActive}>
+         
+        <EditModalPlacemarkers 
+            user={user} 
+            callback={itemList.updateList}
+            setModalActive={setModalActive} 
+            idEdit={itemList.itemList.id}
+            nameEdit={itemList.itemList.name}
+            latEdit={itemList.itemList.latCur} 
+            lngEdit={itemList.itemList.lngCur} 
+            latNew={markers.lat} 
+            lngNew={markers.lng} 
+            descriptionEdit={itemList.itemList.description}
+            photosEdit={itemList.itemList.photos}
+            />
         <GoogleMap mapContainerStyle={mapCreateContainerStyle} 
           zoom={14} 
           center={
-               center
+                center
             }
           options={options}
-          onClick={(event)=>{
+          onClick={(event)=>[
               setMarkers(
                 {
                   lat: parseFloat(event.latLng.lat()),
                   lng: parseFloat(event.latLng.lng()),
-          })}} >
-          <PrivatePlaceMarkers user={user}/>
+          })
+          ]} >
 
+            <Marker position={{lat:parseFloat(itemList.itemList.latCur), lng: parseFloat(itemList.itemList.lngCur)}}/>
            <Marker position={{lat:parseFloat(markers.lat), lng: parseFloat(markers.lng)}}/>
         </GoogleMap>
-      </Modal>
+    </Modal> 
 
-      </main>
+      </div>
+       
     );
+        
+        
 }

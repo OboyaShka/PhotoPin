@@ -36,6 +36,10 @@
       "plugin": "users-permissions",
       "model": "user",
       "via": "placemarkers"
+    },
+    "likes": {
+      "type": "integer",
+      "default": 0
     }
   }
 }

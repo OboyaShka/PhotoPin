@@ -18,12 +18,12 @@ function PrivateRoute({children, ...rest}){
       currentUser.isAuthenticated ? (
         children
       ) : (
-        <Redirect
+        setTimeout(() => {  <Redirect
           to={{
             pathname: "/login",
             state: {from: location}
           }}
-        />
+        /> }, 200)
       )
   
   }      
