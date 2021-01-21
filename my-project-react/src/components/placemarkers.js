@@ -28,9 +28,12 @@ class Placemarkers extends React.Component {
         })
     }
     
+
     componentDidUpdate(){
         this.loadPlaceMarkers();
     }
+
+  
     /*
     componentDidMount() {
         this.loadPlaceMarkers();
