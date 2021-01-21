@@ -6,7 +6,7 @@ import MapStyles from '../MapStyles'
 import Modal from './Modal/modal';
 import { useState, useCallback } from 'react'
 import "../styles.css";
-
+import { useCurrentUser } from "./CurrentUser";
 
 const libraries=["places","visualization","drawing","geometry","localContext"]
 
@@ -42,18 +42,12 @@ export default function  Map() {
         libraries,
      
       })
-      
-      const [centerMap, setCenterMap]= React.useState([])
-     
-    
-      const [markers, setMarkers]= React.useState([])
-      const [modalActive, setModalActive]= React.useState(false)
-    
+      const user = useCurrentUser();
+
       if (loadError) return "Error loading maps"
       if (!isLoaded) return "Loading Maps"
-    
-
-
+      
+      
     return (
 
 
@@ -66,7 +60,7 @@ export default function  Map() {
       options={options}
       
       >   
-      <PlaceMarkers />
+      <PlaceMarkers user={user}/>
       </GoogleMap>
       
       

@@ -32,7 +32,12 @@ const Header = () => {
         {user.isAuthenticated && (
           <Link className="link dim white dib mr3" onClick={handleLogout}>
             Выйти
-          </Link>
+          </Link>     
+        )}
+        {user.isAuthenticated && (
+          <Link className="link dim white dib mr3" style={{ position: "absolute",right: "0"}}>
+            {user.username}
+          </Link>     
         )}
       </nav>
     </header>

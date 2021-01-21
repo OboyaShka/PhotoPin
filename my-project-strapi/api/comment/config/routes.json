@@ -2,52 +2,51 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/placemarkers",
-      "handler": "placemarker.find",
+      "path": "/comments",
+      "handler": "comment.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/placemarkers/count",
-      "handler": "placemarker.count",
+      "path": "/comments/count",
+      "handler": "comment.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/placemarkers/:id",
-      "handler": "placemarker.findOne",
+      "path": "/comments/:id",
+      "handler": "comment.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/placemarkers",
-      "handler": "placemarker.create",
+      "path": "/comments",
+      "handler": "comment.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/placemarkers/:id",
-      "handler": "placemarker.update",
+      "path": "/comments/:id",
+      "handler": "comment.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/placemarkers/:id",
-      "handler": "placemarker.delete",
+      "path": "/comments/:id",
+      "handler": "comment.delete",
       "config": {
         "policies": []
       }
     }
-  ] 
+  ]
 }
-

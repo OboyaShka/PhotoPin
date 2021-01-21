@@ -40,6 +40,10 @@
     "likes": {
       "type": "integer",
       "default": 0
+    },
+    "comments": {
+      "via": "placemarker",
+      "collection": "comment"
     }
   }
 }
