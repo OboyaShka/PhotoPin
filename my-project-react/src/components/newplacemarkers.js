@@ -84,6 +84,10 @@ class NewPlacemarkers extends React.Component {
         return(
             <div>
                 <div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+                    </div>
                     <div>Введите название места:</div>
                     <input  type="text" name="input1" id="input1" required=""
                          value={ this.state.data.name || "" } onChange={ this.changeValueName.bind( this ) }/>
