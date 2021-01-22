@@ -34,7 +34,7 @@ class NewPlacemarkers extends React.Component {
 
         const upload_res = await axios({
             method: 'POST',
-            url:"http://localhost:20000/upload",
+            url:"http://178.248.1.62:8080/upload",
             data
         })
 
@@ -54,8 +54,8 @@ class NewPlacemarkers extends React.Component {
     }
 
     saveStateDocument(e) {
-        
-        let result = fetch('http://localhost:20000/placemarkers',
+  
+        let result = fetch(`http://178.248.1.62:8080/placemarkers`,
         {
             method: 'post',
             headers: {"Content-Type": "application/json"},
@@ -84,10 +84,6 @@ class NewPlacemarkers extends React.Component {
         return(
             <div>
                 <div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
-                    </div>
                     <div>Введите название места:</div>
                     <input  type="text" name="input1" id="input1" required=""
                          value={ this.state.data.name || "" } onChange={ this.changeValueName.bind( this ) }/>
@@ -101,7 +97,7 @@ class NewPlacemarkers extends React.Component {
                     <button>Загрузить</button>
                 </form>
                 { this.photoUrl ? 
-                <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://localhost:20000${this.photoUrl}`} />
+                <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://178.248.1.62:8080${this.photoUrl}`} />
                 :""}
                  </div>
                 <div>

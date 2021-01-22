@@ -19,7 +19,7 @@ class ListPlacemarkers extends React.Component {
     } 
   
     loadPlaceMarkers(){
-        fetch('http://localhost:20000/placemarkers').then((response)=>{
+        fetch('http://178.248.1.62:8080/placemarkers').then((response)=>{
             if(response.status >= 400){
                 throw new Error('Bad response From Server')
             }
@@ -58,11 +58,10 @@ class ListPlacemarkers extends React.Component {
                         <div>{itemList.description}</div>
                         {itemList.photos.map((item, index)=>( 
                             <div key={index}>
-                               <img style={{ objectFit: "cover", width: "700px", height: "400px"}} src={`http://localhost:20000${item.url}`}/>
+                               <img style={{ objectFit: "cover", width: "700px", height: "400px"}} src={`http://178.248.1.62:8080${item.url}`}/>
                             </div>
                         ))}
                         <EditPlacemarkers itemList={itemList} updateList={this.loadPlaceMarkers.bind(this)}/> 
-            
                     </li>: ""
                 ))} 
                 </ul>

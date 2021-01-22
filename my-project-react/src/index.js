@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CurrentUserProvider } from "./components/CurrentUser.js";
 
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>

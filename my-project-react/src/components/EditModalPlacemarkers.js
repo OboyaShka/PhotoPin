@@ -34,7 +34,7 @@ class EditModalPlacemarkers extends React.Component {
 
         const upload_res = await axios({
             method: 'POST',
-            url:"http://localhost:20000/upload",
+            url:`http://178.248.1.62:8080/upload`,
             data
         })
 
@@ -55,7 +55,7 @@ class EditModalPlacemarkers extends React.Component {
 
     saveStateDocument(e) {
         
-        let result = fetch(`http://localhost:20000/placemarkers/${this.props.idEdit}`,
+        let result = fetch(`http://178.248.1.62:8080/placemarkers/${this.props.idEdit}`,
         {
             method: 'PUT',
             headers: {"Content-Type": "application/json"},
@@ -77,7 +77,7 @@ class EditModalPlacemarkers extends React.Component {
 
     deleteDocument(e) {
         
-        let result = fetch(`http://localhost:20000/placemarkers/${this.props.idEdit}`,
+        let result = fetch(`http://178.248.1.62:8080/placemarkers/${this.props.idEdit}`,
         {
             method: 'delete',
             headers: {"Content-Type": "application/json"},
@@ -119,7 +119,7 @@ class EditModalPlacemarkers extends React.Component {
                     <button>Загрузить</button>
                 </form>
                 { this.props.photosEdit[0] ? 
-                <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://localhost:20000${this.props.photosEdit[0].url}`} />
+                <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://178.248.1.62:8080${this.props.photosEdit[0].url}`} />
                 :""}
                  </div>
                 <div>

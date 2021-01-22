@@ -18,7 +18,7 @@ class Placemarkers extends React.Component {
     }
 
     loadPlaceMarkers() {
-        fetch('http://localhost:20000/placemarkers').then((response) => {
+        fetch(`http://178.248.1.62:8080/placemarkers`).then((response) => {
             if (response.status >= 400) {
                 throw new Error('Bad response From Server')
             }
@@ -58,7 +58,7 @@ class Placemarkers extends React.Component {
 
     saveComment(e) {
         
-        let result = fetch('http://localhost:20000/comments',
+        let result = fetch('http://178.248.1.62:8080/comments',
         {
             method: 'post',
             headers: {"Content-Type": "application/json"},
@@ -83,7 +83,7 @@ class Placemarkers extends React.Component {
             this.currentItem.likes= this.currentItem.likes +1
         }
         
-        let result = fetch(`http://localhost:20000/placemarkers/${this.currentItem.id}`,
+        let result = fetch(`http://178.248.1.62:8080/placemarkers/${this.currentItem.id}`,
         {
             method: 'put',
             headers: {"Content-Type": "application/json"},
@@ -116,7 +116,7 @@ class Placemarkers extends React.Component {
                             <p>{this.currentItem.description}</p>
                             {this.currentItem.photos.map((item, index) => (
                                 <div key={index}>
-                                    <img style={{ objectFit: "cover", width: "700px", height: "400px" }} src={`http://localhost:20000${item.url}`} />
+                                    <img style={{ objectFit: "cover", width: "700px", height: "400px" }} src={`http://178.248.1.62:8080${item.url}`} />
                                 </div>
                             ))}
                        
