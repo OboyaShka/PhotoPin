@@ -6,6 +6,7 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/a
 import Modal from './Modal/modal.css'
 import EditPlacemarkers from './EditPlacemarkers'
 
+
 class ListPlacemarkers extends React.Component {
 
     constructor(){
@@ -50,21 +51,21 @@ class ListPlacemarkers extends React.Component {
 
     render() {
         return(
-                <ul>
+                <div className="list">
                 {this.state.placemarkers.map((itemList, index)=>(   
                     itemList.users_permissions_user.id === this.props.user.id ? 
-                    <li key={index}>
-                        <div>{itemList.name}</div>
-                        <div>{itemList.description}</div>
+                    <div className="element" key={index}>
+                        <h2 className="text">{itemList.name}</h2>
+                      
                         {itemList.photos.map((item, index)=>( 
                             <div key={index}>
                                <img style={{ objectFit: "cover", width: "700px", height: "400px"}} src={`http://178.248.1.62:8080${item.url}`}/>
                             </div>
                         ))}
                         <EditPlacemarkers itemList={itemList} updateList={this.loadPlaceMarkers.bind(this)}/> 
-                    </li>: ""
+                    </div>: ""
                 ))} 
-                </ul>
+                </div>
         )
         
     } 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useCurrentUser, useDispatchCurrentUser } from "./components/CurrentUser";
 import { useHistory } from "react-router-dom";
 import { callApi } from "./utils";
-
+import LoginImg from "./images/login_img.png"
 export default function Login() {
   const dispatch = useDispatchCurrentUser();
   const currentUser = useCurrentUser();
@@ -36,6 +36,9 @@ export default function Login() {
     <main>
       {errorMsg && <p>{errorMsg}</p>}
       <form className="measure center mt4" onSubmit={handleSubmit}>
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+          <img src={LoginImg} style={{ objectFit: "cover", width: "350px", height: "350px"}}/>
+        </div>
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
             <legend className="f4 fw6 ph0 mh0">Авторизация</legend>
             <div className="mt3">

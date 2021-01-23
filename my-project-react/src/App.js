@@ -8,9 +8,12 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import Map from "./components/Map";
 import { useCurrentUser, useDispatchCurrentUser } from "./components/CurrentUser";
 
+
+
 function PrivateRoute({children, ...rest}){
   let currentUser = useCurrentUser();
 
+  
   return(
     <Route
     {...rest}

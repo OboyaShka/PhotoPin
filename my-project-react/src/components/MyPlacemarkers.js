@@ -8,6 +8,9 @@ import Modal from './Modal/modal';
 import { useState, useCallback } from 'react'
 import "../styles.css";
 import { useCurrentUser } from "./CurrentUser";
+import Icon from '../images/pin1.png';
+import AddIcon from '../images/add_img.png';
+
 const libraries=["places","visualization","drawing","geometry","localContext"]
 
 
@@ -18,7 +21,7 @@ const mapContainerStyle = {
 
 const mapCreateContainerStyle = {
   width: "800px",
-  height: "800px"
+  height: "700px"
 }
 
 const options = {
@@ -56,8 +59,12 @@ export default function  MyPlacemarkers( then ) {
 
     return (
         <main>
-      <button onClick={()=>setModalActive(true)}>Добавить точку</button>
-    
+      <div className="centerButton">
+      <h2 className="text">Поставить точку </h2>
+      <button className="button" onClick={()=>setModalActive(true)}>
+          <img src={AddIcon}/>
+      </button>
+      </div>  
       <ListPlacemarkers user={user}/>
       
       <Modal active={modalActive} setActive={setModalActive}>
@@ -81,7 +88,7 @@ export default function  MyPlacemarkers( then ) {
           })}} >
           <PrivatePlaceMarkers user={user}/>
 
-           <Marker position={{lat:parseFloat(markers.lat), lng: parseFloat(markers.lng)}}/>
+           <Marker icon={Icon} position={{lat:parseFloat(markers.lat), lng: parseFloat(markers.lng)}}/>
         </GoogleMap>
       </Modal>
 

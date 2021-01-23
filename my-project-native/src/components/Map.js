@@ -10,8 +10,8 @@ const height = Dimensions.get('window').height
 
 const Map = () =>{
     return (
-        <MapView
-            style={styles.map}
+        <MapView 
+            style={height}
             loadingEnabled={true}
             region={{ 
                 latitude: 56.837650,
@@ -26,11 +26,5 @@ const Map = () =>{
         </MapView>
     )
 }
-
-const styles = StyleSheet.create({
-    map:{
-        height
-    }
-})
 
 export default Map

@@ -9,8 +9,6 @@ const MapScreen = ({navigation})=>{
             <Map></Map>
         </SafeAreaView>
     )
-
-
 }
 
 export default MapScreen

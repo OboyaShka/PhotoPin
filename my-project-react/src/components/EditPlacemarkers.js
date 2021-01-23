@@ -9,6 +9,8 @@ import { useState, useCallback } from 'react'
 import "../styles.css";
 import { useCurrentUser } from "./CurrentUser";
 import { render } from 'react-dom';
+import Icon from '../images/pin1.png';
+
 const libraries=["places","visualization","drawing","geometry","localContext"]
 
 
@@ -69,8 +71,8 @@ export default function EditPlacemarkers( itemList ) {
   
       return (
       
-        <div>  
-    <button onClick={()=>setModalActive(true)}>Изменить точку</button>
+        <div className="list">  
+    <button className="button1" onClick={()=>setModalActive(true)}>Изменить точку</button>
     <Modal active={modalActive} setActive={setModalActive}>
          
         <EditModalPlacemarkers 
@@ -100,8 +102,8 @@ export default function EditPlacemarkers( itemList ) {
           })
           ]} >
 
-            <Marker position={{lat:parseFloat(itemList.itemList.latCur), lng: parseFloat(itemList.itemList.lngCur)}}/>
-           <Marker position={{lat:parseFloat(markers.lat), lng: parseFloat(markers.lng)}}/>
+            <Marker icon={Icon} position={{lat:parseFloat(itemList.itemList.latCur), lng: parseFloat(itemList.itemList.lngCur)}}/>
+           <Marker icon={Icon} position={{lat:parseFloat(markers.lat), lng: parseFloat(markers.lng)}}/>
         </GoogleMap>
     </Modal> 
 

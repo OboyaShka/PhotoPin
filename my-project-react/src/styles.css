@@ -6,3 +6,107 @@
   main {
     padding-top: 75px;
   }
+
+  .placemarkers .name{
+    text-align: center;
+    padding-bottom: 20px
+  }
+
+  .placemarkers .description{
+    padding-top: 25px
+  }
+
+  .placemarkers .author{
+    text-align: right;
+  }
+
+  .placemarkers .author .text{
+    display: inline-block;
+  }
+
+  .placemarkers .like{
+    background: none;
+    border: none;
+    width: 50px;
+    height: 50px;
+  }
+
+ .centerButton {
+  margin:0 25% 0 25%;
+  width:50%;
+ }
+
+ .centerButton  .text{
+    margin-top: 50px;
+    text-align: center;
+  }
+
+  .centerButton .button {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-bottom: 100px;
+    background: none;
+    border: none;
+    width: 150px;
+    height: 150px;
+  }
+
+  .list {
+    display:grid;
+    grid-template-columns: repeat( auto-fill, minmax(35rem, 1fr) );
+    grid-gap: 10rem;
+    padding:1rem;
+    background:#dbf0f0;
+    border-top: 12px double #c7e6e6;
+    border-radius: 2px;
+  }
+
+  .list .text{
+    text-align: center;
+  }
+
+  .list .element {
+    background:rgb(0,169,157);
+    --text:black;
+    position: relative;
+    box-shadow:0 0 2rem -1rem rgba(0,0,0,.05);
+    border: 2px solid #000000;
+    border-radius: 5px;
+}
+
+.list .button1 {
+  background:rgb(0,169,157);
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.input{
+  
+}
+
+.input .file-input{
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+
+.input .button{
+  background:rgb(0,169,157);
+  width: 100%;
+  text-align: center;
+  margin-top:10px;
+}
+
+.Progress,
+.Progress__Seek{
+  height: 3px;
+}
+.Progress{
+  background-color: #eee;
+}
+.Progress__Seek{
+  background-color: green;
+}
