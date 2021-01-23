@@ -9,15 +9,31 @@
 
   .placemarkers .name{
     text-align: center;
-    padding-bottom: 20px
+    padding-bottom: 20px;
+    width: 700px
   }
 
   .placemarkers .description{
-    padding-top: 25px
+    padding-top: 25px;
+  }
+  
+  .placemarkers .description-text{
+    word-wrap: break-word;
+    width: 700px
   }
 
   .placemarkers .author{
     text-align: right;
+  }
+
+  .placemarkers .image{
+    border: 1px double #000000;
+    border-radius: 10px;
+  }
+
+  .placemarkers .modal{
+    border: 2px double #000000;
+    border-radius: 10px;
   }
 
   .placemarkers .author .text{
@@ -29,11 +45,72 @@
     border: none;
     width: 50px;
     height: 50px;
+    outline: none;
+
+  }
+
+  .placemarkers .scroll{
+    height: 100px;
+    overflow: auto;
+    background-color:rgb(208, 250, 243);
+
+  }
+
+  .placemarkers .comment{
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background-color: white;
+    width: 60%;
+    padding-left: 20px;
+    box-sizing: border-box;
+    margin-bottom:10px;
+  }
+
+  .placemarkers .comment .authorAll{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .placemarkers .comment .dateAll{
+    padding-right: 20px;
+  }
+
+  .placemarkers .comment .contentAll{
+    
+  }
+
+  .placemarkers .realcomment{
+
+  }
+
+
+  .placemarkers .mycomment{
+    float: right;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background-color: rgb(123, 231, 226);
+    width: 60%;
+    padding-left: 20px;
+    box-sizing: border-box;
+    margin-bottom:10px;
+  }
+
+  .placemarkers .mycomment .authorAll{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .placemarkers .mycomment .dateAll{
+    padding-right: 20px;
+  }
+
+  .placemarkers .mycomment .contentAll{
   }
 
  .centerButton {
   margin:0 25% 0 25%;
   width:50%;
+  
  }
 
  .centerButton  .text{
@@ -42,6 +119,8 @@
   }
 
   .centerButton .button {
+    outline: none;
+  border: none;
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
@@ -54,7 +133,7 @@
 
   .list {
     display:grid;
-    grid-template-columns: repeat( auto-fill, minmax(35rem, 1fr) );
+    grid-template-columns: repeat( auto-fill, minmax(30rem, 1fr) );
     grid-gap: 10rem;
     padding:1rem;
     background:#dbf0f0;
@@ -92,9 +171,19 @@
   padding-top: 10px;
 }
 
+.input .img-input{
+  padding-top: 25px;
+}
 
 .input .button{
   background:rgb(0,169,157);
+  width: 100%;
+  text-align: center;
+  margin-top:10px;
+}
+
+.input .button-red{
+  background:rgb(192, 103, 111);
   width: 100%;
   text-align: center;
   margin-top:10px;

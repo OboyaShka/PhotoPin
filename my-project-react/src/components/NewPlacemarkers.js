@@ -109,10 +109,7 @@ class NewPlacemarkers extends React.Component {
                     </form>
                     <div className="Progress">
                         <div className="Progress__Seek" style={{ width: `${percent}%` }}></div>
-                    </div>
-                    {loading &&
-                        <p>Загрузка...</p>
-                    }
+                    </div> 
                 </div>
                 <div>
 

@@ -21,7 +21,7 @@ const mapContainerStyle = {
 
 const mapCreateContainerStyle = {
   width: "800px",
-  height: "800px"
+  height: "650px"
 }
 
 const options = {

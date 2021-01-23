@@ -30,7 +30,7 @@ class ListPlacemarkers extends React.Component {
         })
     }
 
-    componentDidMount(){
+    componentDidUpdate(){
         this.loadPlaceMarkers();
     }
 

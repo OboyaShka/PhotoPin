@@ -13,7 +13,7 @@ const libraries=["places","visualization","drawing","geometry","localContext"]
 
 const mapContainerStyle = {
     width: "100vw",
-    height: "95vh"
+    height: "92vh"
 }
 
 const mapCreateContainerStyle = {

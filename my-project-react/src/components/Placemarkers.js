@@ -7,7 +7,9 @@ import Icon1 from '../images/pin1.png';
 import Icon2 from '../images/pin2.png';
 import Icon3 from '../images/pin3.png';
 import LikeIcon from '../icon/like_icon.png';
-
+import DisLikeIcon from '../icon/dislike_icon.png';
+const moment = require('moment');
+moment.locale("ru");
 
 class Placemarkers extends React.Component {
 
@@ -35,7 +37,7 @@ class Placemarkers extends React.Component {
 
 
     componentDidUpdate() {
-        this.loadPlaceMarkers();
+
     }
 
 
@@ -82,11 +84,8 @@ class Placemarkers extends React.Component {
 
     likeAction() {
 
-        if (this.state.like_active) {
-            this.currentItem.likes = this.currentItem.likes - 1
-        } else {
             this.currentItem.likes = this.currentItem.likes + 1
-        }
+    
 
         let result = fetch(`http://178.248.1.62:8080/placemarkers/${this.currentItem.id}`,
             {
@@ -101,6 +100,25 @@ class Placemarkers extends React.Component {
         this.setState({ ...this.state, like_active: !this.state.like_active })
     }
 
+    dislikeAction() {
+
+
+        this.currentItem.likes = this.currentItem.likes - 1
+     
+
+
+        let result = fetch(`http://178.248.1.62:8080/placemarkers/${this.currentItem.id}`,
+            {
+                method: 'put',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    "likes": this.currentItem.likes,
+
+                })
+            })
+
+        this.setState({ ...this.state, like_active: !this.state.like_active })
+    }
 
     render() {
         return (
@@ -120,41 +138,51 @@ class Placemarkers extends React.Component {
 
                 <div className={this.state.modal_active ? "modal active" : "modal"} onClick={this.modalActive.bind(this)}>
                     {this.currentItem &&
-                        <div className={this.state.modal_active ? "modal__content active" : "modal__content"} onClick={e => e.stopPropagation()}>
+                        <div className={ this.state.modal_active ? "modal__content active" : "modal__content"} onClick={e => e.stopPropagation()}>
 
                             <h1 className="name">{this.currentItem.name}</h1>
                             {this.currentItem.photos.map((item, index) => (
+                                console.log(item.url),
                                 <div key={index}>
-                                    <img style={{ objectFit: "cover", width: "700px", height: "400px" }} src={`http://178.248.1.62:8080${item.url}`} />
+                                    <img className="image" style={{ objectFit: "cover", width: "700px", height: "400px" }} src={`http://178.248.1.62:8080${item.url}`} />
                                 </div>
                             ))}
                                 <h4 className="description">Описание:</h4>
-                                <p >{this.currentItem.description}</p>
+                                <p className="description-text">{this.currentItem.description}</p>
 
                                 <h5 className="author">{"Автор: "} 
                                     <h5 className="text"><b>{this.currentItem.users_permissions_user.username}</b></h5>
                                 </h5>
-                         
+                                <hr size="3px" width="100%" align="left"/>
                                 <p>
                                 <button  className="like" onClick={this.likeAction.bind(this)}>
                                     <img src={LikeIcon}/>
                                 </button>
                                     {this.currentItem.likes} Нравится 
+                                <button  className="like" onClick={this.dislikeAction.bind(this)}>
+                                    <img src={DisLikeIcon}/>
+                                </button>
                                 </p>
+                                <div class="scroll">
                                 {this.currentItem.comments.map((item, ix) => (
-                                    <div key={ix}>
-                                        <div>{item.author}</div>
-                                        <div>{item.content}</div>
-                                        <div>{item.published_at}</div>
+                                    <div key={ix} class="realcomment">
+                                    <div className={this.props.user.username === item.author? "mycomment":"comment"} >
+                                        <div class="authorAll"><b>{item.author}</b>               
+                                        <div class="dateAll">{moment(item.published_at).format('ll')}</div>
+                                        </div>     
+                                        <div class="contentAll">{item.content}</div>
 
                                     </div>
-
-
+                                    </div >
                                 ))}
-                                <div>Написать комментарий</div>
-                                <input type="text" name={`input`} id={`input`} required=""
-                                    value={this.state.data.content || ""} onChange={this.changeValueContent.bind(this)} />
-                                <button onClick={this.saveComment.bind(this)}>Отправить</button>
+                                </div>
+                                <div>Написать комментарий: </div>
+                                <div class="input-group mb-3">
+                                <input class="form-control"  type="text" name={`input`} id={`input`} required=""
+                                    value={this.state.data.content || ""} onChange={this.changeValueContent.bind(this)} >
+                                </input>
+                                <button class="btn btn-outline-secondary"  onClick={this.saveComment.bind(this)}>Отправить</button>
+                                </div>
                         </div>}
                 </div>
             </div>

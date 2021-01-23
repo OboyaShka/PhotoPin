@@ -63,7 +63,7 @@ class PrivatePlaceMarkers extends React.Component {
                     
                 ))} 
                 
-                <div className={this.state.modal_active ? "modal active"  : "modal" } onClick={this.modalActive.bind(this)}> 
+                <div style={{paddingRight: "1300px"}} className={this.state.modal_active ? "modal active"  : "modal" } onClick={this.modalActive.bind(this)}> 
                 {  this.currentItem && 
                     <div className={this.state.modal_active ? "modal__content active"  : "modal__content" } onClick={e=>e.stopPropagation()}>
                         

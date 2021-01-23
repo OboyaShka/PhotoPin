@@ -43,11 +43,11 @@ export default function Login() {
             <legend className="f4 fw6 ph0 mh0">Авторизация</legend>
             <div className="mt3">
               <label className="db fw6 lh-copy f6" htmlFor="email-address">E-mail</label>
-              <input ref={emailRef} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address" />
+              <input ref={emailRef} className="pa2 input-reset ba bg-transparent w-100" type="email" name="email-address"  id="email-address" />
             </div>
             <div className="mv3">
               <label className="db fw6 lh-copy f6" htmlFor="password">Пароль</label>
-              <input ref={passwordRef} className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password" />
+              <input ref={passwordRef} className="b pa2 input-reset ba bg-transparent w-100" type="password" name="password"  id="password" />
             </div>
           </fieldset>
           <div className="">

@@ -4,7 +4,12 @@ import {GoogleMap, useLoadScript, Marker, InfoWindow} from '@react-google-maps/a
 import Modal from './Modal/modal.css'
 import axios from 'axios'
 
+/** 
+* @param {int} value
+* @param {int} total
+*/
 
+const calculatePercent = (value, total) => Math.round(value / total * 100)
 
 class EditModalPlacemarkers extends React.Component {
 
@@ -12,7 +17,9 @@ class EditModalPlacemarkers extends React.Component {
         super()
         this.state={
             data:{},
-            file:null
+            file:null,
+            percent: 0,
+            loading: false
         }
 
     } 
@@ -29,15 +36,17 @@ class EditModalPlacemarkers extends React.Component {
     handleSubmit = async (event)=>{
 
         event.preventDefault()
+        this.setState({ loading: true })
         const data=new FormData()
         data.append('files', this.state.file)
 
         const upload_res = await axios({
             method: 'POST',
             url:`http://178.248.1.62:8080/upload`,
-            data
+            data,
+            onUploadProgress: (progress) => this.setState({ percent: calculatePercent(progress.loaded, progress.total) })
         })
-
+        this.setState({ loading: false })
         this.photoLoad=upload_res.data[0]
         this.photoUrl=upload_res.data[0].url
 
@@ -102,32 +111,37 @@ class EditModalPlacemarkers extends React.Component {
     
 
     render() {
-       
+        const { percent, loading } = this.state
         return(
-            <div>
+            <div className="input">
                 <div>
-                    <div>Введите название места:</div>
-                    <input  type="text" name={`input1${this.props.idEdit}`} id={`input1${this.props.idEdit}`}  required=""
+                    <div>Название места:</div>
+                    <input  class="form-control" type="text" name={`input1${this.props.idEdit}`} id={`input1${this.props.idEdit}`}  required=""
                          value={ this.state.data.name || this.props.nameEdit || "" } onChange={ this.changeValueName.bind( this ) }/>
-                    <div>Введите описание места:</div>
-                    <input  type="text" name={`input2${this.props.idEdit}`}  id={`input2${this.props.idEdit}`}  required=""
-                         value={ this.state.data.description ||this.props.descriptionEdit || "" } onChange={ this.changeValueDescription.bind( this ) }/>
+                    <div>Описание места:</div>
+                    <textarea class="form-control"  type="text" name={`input2${this.props.idEdit}`}  id={`input2${this.props.idEdit}`}  required=""
+                         value={ this.state.data.description ||this.props.descriptionEdit || "" } onChange={ this.changeValueDescription.bind( this ) } rows="3"/>
                 </div>
                 <div className="FileUpload">
-                <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleChange} type="file"/>
-                    <button>Загрузить</button>
-                </form>
+                
+                <form class="input-group file-input" onSubmit={this.handleSubmit}>     
                 { this.props.photosEdit[0] ? 
                 <img style={{ objectFit: "cover", width: "100px", height: "80px"}} src={`http://178.248.1.62:8080${this.props.photosEdit[0].url}`} />
                 :""}
+                    <input class="form-control img-input" onChange={this.handleChange} type="file"/>
+                    <button class="btn btn-outline-secondary">Загрузить</button>
+                </form>
+                <div className="Progress">
+                        <div className="Progress__Seek" style={{ width: `${percent}%` }}></div>
+                    </div> 
+               
                  </div>
                 <div>
                     
-                    <button
+                    <button className="button"
                         onClick={ this.saveStateDocument.bind( this ) }>Сохранить
                     </button>
-                    <button
+                    <button className="button-red"
                         onClick={ this.deleteDocument.bind( this ) }>Удалить
                     </button>
                 </div>
