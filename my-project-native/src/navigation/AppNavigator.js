@@ -15,7 +15,7 @@ const AppNavigator = createStackNavigator({
     Placemarker:{
         screen: PlacemarkerScreen,
         navigationOptions: ({navigation})=>({
-            title: `Точка №${navigation.getParam('item').id}`
+            title: `${navigation.getParam('item').name}`
         })
     },
 })
