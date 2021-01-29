@@ -4,6 +4,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import  MapScreen from '../screens/MapScreen'
 import  PlacemarkerScreen from '../screens/PlacemarkerScreen'
+import  PlacemarkerVkScreen from '../screens/PlacemarkerVkScreen'
 
 const AppNavigator = createStackNavigator({
     Map:{
@@ -16,6 +17,12 @@ const AppNavigator = createStackNavigator({
         screen: PlacemarkerScreen,
         navigationOptions: ({navigation})=>({
             title: `${navigation.getParam('item').name}`
+        })
+    },
+    PlacemarkerVk:{
+        screen: PlacemarkerVkScreen,
+        navigationOptions: ({navigation})=>({
+            title: `${navigation.getParam('item').id}`
         })
     },
 })

@@ -10,9 +10,13 @@ const MapScreen = ( {navigation} )=>{
     const changeSm = (item) => {
         navigation.navigate("Placemarker", {item})
     }
+    
+    const changeVkSm = (item) => {
+        navigation.navigate("PlacemarkerVk", {item})
+    }
 
     return(
-            <Map  changeSm ={{ changeSm }} /> 
+            <Map  changeSm ={{ changeSm }} changeVkSm ={{ changeVkSm }}/> 
     )
 }
 
