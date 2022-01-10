@@ -6,4 +6,6 @@ Pet-project сделанный для Проектного практикума.
 
 Стек технологий: React(с использованием хуков), Strapi, Google Maps Api, React Native + VK API для мобильной версии.
 
-Демоснстрация: https://www.youtube.com/watch?v=AeoXPxpcOS0&list=PLohd0e9jVa5uOc4Vsqz28aVomewsEZmUk&index=2
+Демонстрация: https://www.youtube.com/watch?v=AeoXPxpcOS0&list=PLohd0e9jVa5uOc4Vsqz28aVomewsEZmUk&index=2
+
+Презентация и отчёт: https://disk.yandex.ru/d/N-jt-gzbo77OsA
